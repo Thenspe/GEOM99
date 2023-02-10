@@ -41,7 +41,6 @@
         //create the map and set basemap
         const map = new Map({
           basemap: "arcgis-topographic" // Basemap layer service
-
         });
         // create the mapview
         const view = new MapView({
@@ -50,13 +49,25 @@
             zoom: 13, // Zoom level
             container: "viewDiv" // Div element
         });
-        // create a widget for toggling the basemap
+
+        // create a widget for toggling the basemap between topographic and imagery
         const basemapToggle = new BasemapToggle({
           view: view,
           nextBasemap: "arcgis-imagery"
         });
         // add the widget to the bottom right corner of the view
         view.ui.add(basemapToggle,"bottom-right");
+
+        // create a basemap gallery widget
+        const basemapGallery = new BasemapGallery({
+        view: view,
+        source: {
+          query: {
+            title: '"World Basemaps for Developers" AND owner:esri'
+        }}});
+        // add the gallery widget to the top-right of the view
+        view.ui.add(basemapGallery, "top-right");
+
       });
     </script>
 
